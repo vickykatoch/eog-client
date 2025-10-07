@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["vitest/globals", "node"], // vitest globals + Node typings
+    "moduleResolution": "Bundler"
+  },
+  "include": ["src", "tests", "vitest.setup.ts"]
+}

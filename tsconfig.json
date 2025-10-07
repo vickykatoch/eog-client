@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"], // node types for build tooling
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
