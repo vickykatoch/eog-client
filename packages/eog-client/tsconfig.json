@@ -1,0 +1,11 @@
+{
+   "extends": "../../tsconfig.tslib.json",
+   "compilerOptions": {
+      "types": ["vitest", "node"],
+      "outDir": "../../dist/eog-client",
+      "rootDir": "src",
+      "composite": true,
+      "baseUrl": "./"
+   },
+   "include": ["src", "vite.config.ts", "vitest.config.ts"]
+}

@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import { vi, beforeAll, afterAll } from 'vitest';
 
 // Optional: mock global WebSocket if running in Node environment
