@@ -8,6 +8,20 @@ export default defineConfig({
          provider: 'istanbul', // or 'c8'
          reporter: ['text', 'html'],
          reportsDirectory: '../../coverage',
+         exclude: [
+            'node_modules/**',
+            'dist/**',
+            'build/**',
+            'coverage/**',
+            '**/*.d.ts',
+            '**/*.config.*',
+            '**/tests/**',
+            '**/*.test.*',
+            '**/*.spec.*',
+            '**/test/**',
+            '**/__tests__/**',
+            '**/vitest.setup.*',
+         ],
       },
       exclude: [
          'node_modules',

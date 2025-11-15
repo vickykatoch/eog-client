@@ -12,6 +12,20 @@ export default defineConfig({
       coverage: {
          reporter: ['text', 'html'],
          provider: 'v8',
+         exclude: [
+            'node_modules/**',
+            'dist/**',
+            'build/**',
+            'coverage/**',
+            '**/*.d.ts',
+            '**/*.config.*',
+            '**/tests/**',
+            '**/*.test.*',
+            '**/*.spec.*',
+            '**/test/**',
+            '**/__tests__/**',
+            '**/vitest.setup.*',
+         ],
       },
    },
 });
