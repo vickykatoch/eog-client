@@ -16,6 +16,7 @@
 	"dependencies": {
 		"@helios/amps-controller": "0.0.1",
 		"@helios/sdk": "0.0.1",
+		"@helios/amps-client": "0.0.1",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-router-dom": "^7.11.0"

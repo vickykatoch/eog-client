@@ -1,23 +1,13 @@
 import { resolve } from 'node:path';
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [react()],
-	resolve: {
-		alias: {
-			'@helios/sdk': resolve(__dirname, '../../libs/sdk/src/index.ts'),
-		},
-	},
 	build: {
 		lib: {
-			entry: resolve(__dirname, 'src/plugin.ts'),
-			name: 'AmpsController',
+			entry: resolve(__dirname, 'src/index.ts'),
+			name: 'AmpsClient',
 			formats: ['es'],
-			fileName: 'plugin',
-		},
-		rollupOptions: {
-			external: ['react', 'react/jsx-runtime', 'react-router-dom', '@helios/sdk'],
+			fileName: 'index',
 		},
 		outDir: 'dist',
 		sourcemap: true,
@@ -25,21 +15,18 @@ export default defineConfig({
 	},
 	test: {
 		globals: true,
-		environment: 'jsdom',
+		environment: 'node',
 		setupFiles: './test.setup.ts',
-		css: true,
 		coverage: {
 			provider: 'v8',
 			reporter: ['text', 'json', 'json-summary', 'html'],
-			reportsDirectory: resolve(__dirname, '../../coverage/plugins/amps-controller'),
+			reportsDirectory: resolve(__dirname, '../../coverage/libs/amps-client'),
 			exclude: [
 				'node_modules/',
 				'test/',
 				'**/*.config.ts',
 				'**/*.test.ts',
-				'**/*.test.tsx',
 				'**/*.spec.ts',
-				'**/*.spec.tsx',
 				'**/test/**',
 				'**/tests/**',
 				'**/__tests__/**',
