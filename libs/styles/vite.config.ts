@@ -5,7 +5,7 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve(__dirname, 'src/index.ts'),
-			name: 'AmpsClient',
+			name: 'Styles',
 			formats: ['es'],
 			fileName: 'index',
 		},
@@ -20,7 +20,7 @@ export default defineConfig({
 		coverage: {
 			provider: 'v8',
 			reporter: ['text', 'json', 'json-summary', 'html'],
-			reportsDirectory: resolve(__dirname, '../../coverage/libs/amps-client'),
+			reportsDirectory: resolve(__dirname, '../../coverage/libs/styles'),
 			exclude: [
 				'node_modules/',
 				'test/',

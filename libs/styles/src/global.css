@@ -1,0 +1,17 @@
+@import "./variables.css";
+@import "./flex-layout.css";
+
+html,
+body {
+	height: 100vw;
+	width: 100vh;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	font-family: var(--hx-font);
+	background: var(--hx-bg);
+	color: var(--hx-fg);
+}

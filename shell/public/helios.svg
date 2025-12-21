@@ -1,0 +1,119 @@
+<svg width="800" height="800" viewBox="100 100 600 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient for the main circle -->
+    <radialGradient id="circleGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD93D;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FF9E3D;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#E6447A;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#9B59B6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5DADE2;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Gradients for rays -->
+    <linearGradient id="rayYellow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF176;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#FFD93D;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rayYellow2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD93D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFC107;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rayOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFB74D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9E3D;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rayRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF7043;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E6447A;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rayPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F48FB1;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#E6447A;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rayPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CE93D8;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#9B59B6;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rayBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#81D4FA;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#5DADE2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Center point -->
+  <g transform="translate(400, 400)">
+    
+    <!-- Sun rays (16 rays total) -->
+    <!-- Top ray (0°) -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayYellow1)" transform="rotate(0)"/>
+    
+    <!-- 22.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayYellow2)" transform="rotate(22.5)"/>
+    
+    <!-- 45° -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayYellow2)" transform="rotate(45)"/>
+    
+    <!-- 67.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayOrange)" transform="rotate(67.5)"/>
+    
+    <!-- Right ray (90°) -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayOrange)" transform="rotate(90)"/>
+    
+    <!-- 112.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayRed)" transform="rotate(112.5)"/>
+    
+    <!-- 135° -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayRed)" transform="rotate(135)"/>
+    
+    <!-- 157.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayPink)" transform="rotate(157.5)"/>
+    
+    <!-- Bottom ray (180°) -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayPink)" transform="rotate(180)"/>
+    
+    <!-- 202.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayPurple)" transform="rotate(202.5)"/>
+    
+    <!-- 225° -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayPurple)" transform="rotate(225)"/>
+    
+    <!-- 247.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayBlue)" transform="rotate(247.5)"/>
+    
+    <!-- Left ray (270°) -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayBlue)" transform="rotate(270)"/>
+    
+    <!-- 292.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayBlue)" transform="rotate(292.5)"/>
+    
+    <!-- 315° -->
+    <polygon points="0,-280 -30,-180 30,-180" fill="url(#rayYellow2)" transform="rotate(315)"/>
+    
+    <!-- 337.5° -->
+    <polygon points="0,-280 -25,-180 25,-180" fill="url(#rayYellow1)" transform="rotate(337.5)"/>
+    
+    <!-- Outer ring (dark border) -->
+    <circle cx="0" cy="0" r="190" fill="#2C1810" />
+    
+    <!-- Inner ring (lighter border) -->
+    <circle cx="0" cy="0" r="175" fill="#FFE082" />
+    
+    <!-- Main gradient circle -->
+    <circle cx="0" cy="0" r="165" fill="url(#circleGradient)" />
+    
+    <!-- Letter H -->
+    <text x="0" y="0" 
+          font-family="Arial, sans-serif" 
+          font-size="200" 
+          font-weight="bold" 
+          fill="white" 
+          text-anchor="middle" 
+          dominant-baseline="central">H</text>
+  </g>
+</svg>

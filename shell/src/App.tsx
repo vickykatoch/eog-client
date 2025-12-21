@@ -20,6 +20,7 @@ export default function App() {
 		<div style={{ display: 'flex', minHeight: '100vh' }}>
 			<aside style={{ width: 220, padding: 12, borderRight: '1px solid #ddd' }}>
 				<h3>Helios</h3>
+				<img src="/logo.svg" alt="Helios Logo" style={{ width: '100%', marginBottom: 16 }} />
 				<nav style={{ display: 'grid', gap: 8 }}>
 					{plugins.map((p) => (
 						<Link key={p.id} to={p.route}>
