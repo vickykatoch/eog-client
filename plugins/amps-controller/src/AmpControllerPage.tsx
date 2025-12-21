@@ -1,16 +1,14 @@
-import { NavLink, Outlet, Route, Routes, useResolvedPath } from 'react-router-dom';
+import { Navigate, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 
 function Layout() {
-	const base = useResolvedPath('').pathname.replace(/\/$/, '');
-
 	return (
 		<div style={{ padding: 12 }}>
 			<h3>AMPS Controller</h3>
 
 			<nav style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-				<NavLink to="./">Overview</NavLink>
-				<NavLink to={`${base}/connections`}>Connections</NavLink>
-				<NavLink to={`${base}/subscriptions`}>Subscriptions</NavLink>
+				<NavLink to="overview">Overview</NavLink>
+				<NavLink to="connections">Connections</NavLink>
+				<NavLink to="subscriptions">Subscriptions</NavLink>
 			</nav>
 
 			<Outlet />
@@ -31,8 +29,9 @@ function Subscriptions() {
 export default function AmpControllerPage() {
 	return (
 		<Routes>
-			<Route element={<Layout />}>
-				<Route index element={<Overview />} />
+			<Route path="/" element={<Layout />}>
+				<Route index element={<Navigate to="overview" replace />} />
+				<Route path="overview" element={<Overview />} />
 				<Route path="connections" element={<Connections />} />
 				<Route path="subscriptions" element={<Subscriptions />} />
 			</Route>
