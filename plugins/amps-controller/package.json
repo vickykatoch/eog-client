@@ -1,0 +1,16 @@
+{
+	"name": "@helios/amps-controller",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"main": "./src/plugin.ts",
+	"types": "./src/plugin.ts",
+	"exports": {
+		".": "./src/plugin.ts"
+	},
+	"peerDependencies": {
+		"react": "^19.2.0",
+		"react-router-dom": "^7"
+	},
+	"scripts": {}
+}

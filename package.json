@@ -1,0 +1,20 @@
+{
+	"name": "helios",
+	"private": true,
+	"workspaces": [
+		"shell",
+		"libs/*",
+		"plugins/*"
+	],
+	"scripts": {
+		"dev": "npm run -w shell dev",
+		"build": "npm run -w shell build",
+		"test": "npm run -ws test",
+		"format": "biome check --write",
+		"lint": "biome lint"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.10",
+		"@types/node": "^20.19.27"
+	}
+}
