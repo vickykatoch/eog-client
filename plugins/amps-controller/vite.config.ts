@@ -1,5 +1,5 @@
-import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -26,7 +26,7 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'jsdom',
-		setupFiles: './src/test/setup.ts',
+		setupFiles: './test.setup.ts',
 		css: true,
 		coverage: {
 			provider: 'v8',
@@ -34,7 +34,7 @@ export default defineConfig({
 			reportsDirectory: resolve(__dirname, '../../coverage/plugins/amps-controller'),
 			exclude: [
 				'node_modules/',
-				'src/test/',
+				'test/',
 				'**/*.config.ts',
 				'**/*.test.ts',
 				'**/*.test.tsx',

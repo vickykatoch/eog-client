@@ -30,5 +30,5 @@
 			"@helios/sdk": ["../libs/sdk/src/index.ts"]
 		}
 	},
-	"include": ["src"]
+	"include": ["src", "test.setup.ts"]
 }
