@@ -6,7 +6,7 @@ export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: {
-			'@helios/sdk': resolve(__dirname, '../libs/sdk/src/index.ts'),
+			'@helios/sdk': resolve(__dirname, '../../libs/sdk/src/index.ts'),
 		},
 	},
 	build: {
@@ -22,5 +22,28 @@ export default defineConfig({
 		outDir: 'dist',
 		sourcemap: true,
 		emptyOutDir: true,
+	},
+	test: {
+		globals: true,
+		environment: 'jsdom',
+		setupFiles: './src/test/setup.ts',
+		css: true,
+		coverage: {
+			provider: 'v8',
+			reporter: ['text', 'json', 'json-summary', 'html'],
+			reportsDirectory: resolve(__dirname, '../../coverage/plugins/amps-controller'),
+			exclude: [
+				'node_modules/',
+				'src/test/',
+				'**/*.config.ts',
+				'**/*.test.ts',
+				'**/*.test.tsx',
+				'**/*.spec.ts',
+				'**/*.spec.tsx',
+				'**/test/**',
+				'**/tests/**',
+				'**/__tests__/**',
+			],
+		},
 	},
 });
