@@ -19,11 +19,22 @@
 		"test:shell": "npm run test --workspace=shell",
 		"test:plugins": "npm run test --workspace=@helios/amps-controller",
 		"format": "biome check --write",
-		"lint": "biome lint"
+		"format:check": "biome check",
+		"lint": "biome lint",
+		"lint:check": "biome lint --error-on-warnings",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,css,md}": [
+			"biome check --write --no-errors-on-unmatched",
+			"biome lint --error-on-warnings --no-errors-on-unmatched"
+		]
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.10",
 		"@types/node": "^20.19.27",
-		"@vitest/coverage-v8": "^2.1.9"
+		"@vitest/coverage-v8": "^2.1.9",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.2.11"
 	}
 }
