@@ -1,5 +1,5 @@
 class IoC {
-	private instances: Map<string, any> = new Map();
+	private instances: Map<string, unknown> = new Map();
 
 	register<T>(identifier: string, instance: T): void {
 		this.instances.set(identifier, instance);
