@@ -1,6 +1,7 @@
 import type { HeliosPlugin } from '@helios/sdk';
-import { Suspense, useEffect, useState } from 'react';
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+// import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import { VanillaLayout } from './layouts';
 import { loadEnabledPlugins } from './utils/plugins-catalog';
 
 export default function App() {
@@ -16,6 +17,8 @@ export default function App() {
 	if (error) return <div style={{ padding: 16 }}>Failed to load plugins: {error}</div>;
 	if (!plugins.length) return <div style={{ padding: 16 }}>Loading…</div>;
 
+	return <VanillaLayout />;
+	/*
 	return (
 		<div style={{ display: 'flex', minHeight: '100vh' }}>
 			<aside style={{ width: 220, padding: 12, borderRight: '1px solid #ddd' }}>
@@ -43,4 +46,5 @@ export default function App() {
 			</main>
 		</div>
 	);
+	*/
 }

@@ -1,17 +1,67 @@
 @import "./variables.css";
 @import "./flex-layout.css";
+@import "@fontsource/open-sans/300.css";
+@import "@fontsource/open-sans/300-italic.css";
+@import "@fontsource/open-sans/400.css";
+@import "@fontsource/open-sans/400-italic.css";
+@import "@fontsource/open-sans/500.css";
+@import "@fontsource/open-sans/500-italic.css";
+@import "@fontsource/open-sans/600.css";
+@import "@fontsource/open-sans/600-italic.css";
+@import "@fontsource/open-sans/700.css";
+@import "@fontsource/open-sans/700-italic.css";
+@import "@fontsource/open-sans/800.css";
+@import "@fontsource/open-sans/800-italic.css";
+@import "@fontsource/pt-mono";
 
 html,
 body {
-	height: 100vw;
-	width: 100vh;
+	height: 100vh;
+	width: 100vw;
 	padding: 0;
 	margin: 0;
+	font-family: var(--salt-typography-fontFamily);
+	color: var(--salt-content-primary-foreground);
+	background: var(--salt-container-primary-background);
+	font-size: var(--salt-text-fontSize);
+	line-height: var(--salt-text-lineHeight);
+	font-weight: var(--salt-text-fontWeight);
+	letter-spacing: var(--salt-text-letterSpacing);
+}
+/*
+@font-face {
+	font-family: Amplitude;
+	font-style: normal;
+	font-weight: 300;
+	src:
+		local("Amplitude Light"),
+		url("../../node_modules/@helios/styles/public/fonts/amplitude-light.woff2") format("woff2");
 }
 
-body {
-	margin: 0;
-	font-family: var(--hx-font);
-	background: var(--hx-bg);
-	color: var(--hx-fg);
+@font-face {
+	font-family: Amplitude;
+	font-style: normal;
+	font-weight: 400;
+	src:
+		local("Amplitude"),
+		url("../public/fonts/amplitude-regular.woff2") format("woff2");
 }
+
+@font-face {
+	font-family: Amplitude;
+	font-style: normal;
+	font-weight: 500;
+	src:
+		local("Amplitude Medium"),
+		url("../public/fonts/amplitude-medium.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: Amplitude;
+	font-style: normal;
+	font-weight: 700;
+	src:
+		local("Amplitude Bold"),
+		url("../public/fonts/amplitude-bold.woff2") format("woff2");
+}
+*/
