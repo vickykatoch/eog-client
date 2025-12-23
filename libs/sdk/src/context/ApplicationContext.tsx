@@ -26,7 +26,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 			actionFont="Amplitude"
 			mode={mode}
 			applyClassesTo="root"
-			density="low"
+			density="high"
 		>
 			<ApplicationContext.Provider value={{ mode, toggleThemeMode: toggleMode }}>
 				<AppHost>{children}</AppHost>

@@ -1,5 +1,7 @@
 @import "./variables.css";
 @import "./flex-layout.css";
+@import "./spacing.css";
+@import "./bars.css";
 @import "@fontsource/open-sans/300.css";
 @import "@fontsource/open-sans/300-italic.css";
 @import "@fontsource/open-sans/400.css";
@@ -21,8 +23,8 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: var(--salt-typography-fontFamily);
-	color: var(--salt-content-primary-foreground);
-	background: var(--salt-container-primary-background);
+	color: var(--salt-palette-foreground-primary);
+	background: var(--salt-palette-background-primary);
 	font-size: var(--salt-text-fontSize);
 	line-height: var(--salt-text-lineHeight);
 	font-weight: var(--salt-text-fontWeight);
