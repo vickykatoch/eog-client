@@ -23,27 +23,4 @@ export default defineConfig({
 		sourcemap: true,
 		emptyOutDir: true,
 	},
-	test: {
-		globals: true,
-		environment: 'jsdom',
-		setupFiles: './test.setup.ts',
-		css: true,
-		coverage: {
-			provider: 'v8',
-			reporter: ['text', 'json', 'json-summary', 'html'],
-			reportsDirectory: resolve(__dirname, '../../coverage/plugins/amps-controller'),
-			exclude: [
-				'node_modules/',
-				'test/',
-				'**/*.config.ts',
-				'**/*.test.ts',
-				'**/*.test.tsx',
-				'**/*.spec.ts',
-				'**/*.spec.tsx',
-				'**/test/**',
-				'**/tests/**',
-				'**/__tests__/**',
-			],
-		},
-	},
 });
