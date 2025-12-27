@@ -30,6 +30,15 @@ body {
 	font-weight: var(--salt-text-fontWeight);
 	letter-spacing: var(--salt-text-letterSpacing);
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+}
 /*
 @font-face {
 	font-family: Amplitude;

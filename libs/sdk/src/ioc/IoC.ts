@@ -4,7 +4,6 @@ class IoC {
 	register<T>(identifier: string, instance: T): void {
 		this.instances.set(identifier, instance);
 	}
-
 	resolve<T>(identifier: string): T {
 		const instance = this.instances.get(identifier);
 		if (!instance) {

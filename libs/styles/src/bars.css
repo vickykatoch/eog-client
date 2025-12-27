@@ -1,5 +1,5 @@
 .salt-theme[data-mode="dark"] {
-	--bar-1-background: var(--salt-color-slate-900);
+	--bar-1-background: var(--salt-palette-alpha-contrast-lower);
 	--bar-1-border: var(--salt-color-slate-800);
 }
 .salt-theme[data-mode="light"] {
@@ -10,8 +10,6 @@
 .bar-1 {
 	background-color: var(--bar-1-background);
 	border: 1px solid var(--bar-1-border);
-	/* padding-top: var(--salt-spacing-25);
-    padding-bottom: var(--salt-spacing-25); */
 }
 .bar-1.tb {
 	border-left-width: 0;

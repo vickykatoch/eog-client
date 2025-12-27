@@ -1,22 +1,41 @@
-import { SaltProviderNext } from '@salt-ds/core';
-import { createContext, type ReactNode, useCallback, useContext, useState } from 'react';
+import { type Mode, SaltProviderNext } from '@salt-ds/core';
+import { createContext, type ReactNode, useCallback, useContext, useReducer } from 'react';
+import { DEFAULT_STATE, reducer } from './reducer';
+import type { ApplicationState } from './types';
 
-interface AppContextType {
-	mode: 'light' | 'dark';
+interface AppContextType extends ApplicationState {
+	updateThemeMode: (mode: Mode) => void;
 	toggleThemeMode: () => void;
+	updateThemeSettings?: (settings: Partial<ApplicationState['themeSettings']>) => void;
 }
 export const ApplicationContext = createContext<AppContextType>({} as AppContextType);
 export const useAppContext = () => useContext(ApplicationContext);
-const AppHost = ({ children }: { children: ReactNode }) => {
-	return <div className="flex grow col">{children}</div>;
-};
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-	const [mode, setMode] = useState<'light' | 'dark'>('dark');
+	const [appState, dispatch] = useReducer(reducer, DEFAULT_STATE);
 
-	const toggleMode = useCallback(() => {
-		setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+	const updateThemeMode = useCallback(
+		(mode: Mode) =>
+			dispatch({
+				type: 'SET_MODE',
+				payload: mode === 'light' ? 'dark' : 'light',
+			}),
+		[],
+	);
+	const toggleThemeMode = useCallback(() => {
+		dispatch({
+			type: 'TOGGLE_THEME_MODE',
+		});
 	}, []);
+
+	const updateThemeSettings = useCallback(
+		(settings: Partial<ApplicationState['themeSettings']>) =>
+			dispatch({
+				type: 'SET_THEME_SETTINGS',
+				payload: settings,
+			}),
+		[],
+	);
 
 	return (
 		<SaltProviderNext
@@ -24,12 +43,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 			corner="rounded"
 			headingFont="Amplitude"
 			actionFont="Amplitude"
-			mode={mode}
+			mode={appState.themeSettings.mode}
 			applyClassesTo="root"
-			density="high"
+			density="medium"
 		>
-			<ApplicationContext.Provider value={{ mode, toggleThemeMode: toggleMode }}>
-				<AppHost>{children}</AppHost>
+			<ApplicationContext.Provider
+				value={{ ...appState, updateThemeMode, toggleThemeMode, updateThemeSettings }}
+			>
+				{children}
 			</ApplicationContext.Provider>
 		</SaltProviderNext>
 	);
