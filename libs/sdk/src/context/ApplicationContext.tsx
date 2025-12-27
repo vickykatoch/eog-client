@@ -1,57 +1,24 @@
-import { type Mode, SaltProviderNext } from '@salt-ds/core';
-import { createContext, type ReactNode, useCallback, useContext, useReducer } from 'react';
-import { DEFAULT_STATE, reducer } from './reducer';
-import type { ApplicationState } from './types';
+import { SaltProviderNext } from '@salt-ds/core';
+import { createContext, type ReactNode, useContext } from 'react';
+import { type AppContextType, useStateHandler } from './useContextState';
 
-interface AppContextType extends ApplicationState {
-	updateThemeMode: (mode: Mode) => void;
-	toggleThemeMode: () => void;
-	updateThemeSettings?: (settings: Partial<ApplicationState['themeSettings']>) => void;
-}
 export const ApplicationContext = createContext<AppContextType>({} as AppContextType);
 export const useAppContext = () => useContext(ApplicationContext);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-	const [appState, dispatch] = useReducer(reducer, DEFAULT_STATE);
-
-	const updateThemeMode = useCallback(
-		(mode: Mode) =>
-			dispatch({
-				type: 'SET_MODE',
-				payload: mode === 'light' ? 'dark' : 'light',
-			}),
-		[],
-	);
-	const toggleThemeMode = useCallback(() => {
-		dispatch({
-			type: 'TOGGLE_THEME_MODE',
-		});
-	}, []);
-
-	const updateThemeSettings = useCallback(
-		(settings: Partial<ApplicationState['themeSettings']>) =>
-			dispatch({
-				type: 'SET_THEME_SETTINGS',
-				payload: settings,
-			}),
-		[],
-	);
-
+	const state = useStateHandler();
+	const { mode, density } = state.themeSettings;
 	return (
 		<SaltProviderNext
 			accent="teal"
 			corner="rounded"
 			headingFont="Amplitude"
 			actionFont="Amplitude"
-			mode={appState.themeSettings.mode}
+			mode={mode}
 			applyClassesTo="root"
-			density="medium"
+			density={density}
 		>
-			<ApplicationContext.Provider
-				value={{ ...appState, updateThemeMode, toggleThemeMode, updateThemeSettings }}
-			>
-				{children}
-			</ApplicationContext.Provider>
+			<ApplicationContext.Provider value={state}>{children}</ApplicationContext.Provider>
 		</SaltProviderNext>
 	);
 };
