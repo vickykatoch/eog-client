@@ -18,3 +18,10 @@ global.window.matchMedia =
 		removeEventListener: vi.fn(),
 		dispatchEvent: vi.fn(),
 	}));
+class ResizeObserver {
+	observe() {}
+	unobserve() {}
+	disconnect() {}
+}
+
+global.ResizeObserver = ResizeObserver;

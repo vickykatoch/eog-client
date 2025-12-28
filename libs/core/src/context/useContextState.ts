@@ -10,13 +10,13 @@ export interface AppContextType extends ApplicationState {
 }
 
 export function useStateHandler(): AppContextType {
-	const [appState, dispatch] = useReducer(reducer, DEFAULT_STATE);
+	const [appState, dispatch] = useReducer(reducer, { ...DEFAULT_STATE });
 
 	const updateThemeMode = useCallback(
 		(mode: Mode) =>
 			dispatch({
 				type: 'SET_MODE',
-				payload: mode === 'light' ? 'dark' : 'light',
+				payload: mode,
 			}),
 		[],
 	);
