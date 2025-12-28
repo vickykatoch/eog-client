@@ -24,11 +24,7 @@
 		"erasableSyntaxOnly": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedSideEffectImports": true,
-		"baseUrl": ".",
-		"paths": {
-			"@helios/amps-controller": ["../plugins/amps-controller/src/plugin.ts"],
-			"@helios/sdk": ["../libs/sdk/src/index.ts"]
-		}
+		"baseUrl": "."
 	},
 	"include": ["src", "test.setup.ts"]
 }

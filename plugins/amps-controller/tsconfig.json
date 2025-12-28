@@ -13,9 +13,6 @@
 		"isolatedModules": true,
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": ".",
-		"paths": {
-			"@helios/sdk": ["../libs/sdk/src/index.ts"]
-		},
 		"types": ["vitest/globals", "@testing-library/jest-dom"]
 	},
 	"include": ["src", "tests"]

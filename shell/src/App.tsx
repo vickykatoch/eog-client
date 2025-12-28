@@ -1,4 +1,4 @@
-import type { HeliosPlugin } from '@helios/sdk';
+import type { HeliosPlugin } from '@helios/core';
 import { useEffect, useState } from 'react';
 // import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import { VanillaLayout } from './layouts';

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { AmpsClient } from './amps-client';
+import { AmpsClient } from '../src/amps-client';
 
 describe('AmpsClient', () => {
 	let client: AmpsClient;

@@ -6,13 +6,13 @@ export default defineConfig({
 	plugins: [react()],
 	build: {
 		lib: {
-			entry: resolve(__dirname, 'src/plugin.ts'),
-			name: 'AmpsController',
+			entry: resolve(__dirname, 'src/index.ts'),
+			name: 'Core',
 			formats: ['es'],
-			fileName: 'plugin',
+			fileName: 'HeliosCore',
 		},
 		rollupOptions: {
-			external: ['react', 'react/jsx-runtime', 'react-router-dom', '@helios/core'],
+			external: ['react', 'react/jsx-runtime', 'react-router-dom'],
 		},
 		outDir: 'dist',
 		sourcemap: true,

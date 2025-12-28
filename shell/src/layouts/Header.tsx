@@ -1,4 +1,4 @@
-import { ThemeSwitcher } from '@helios/sdk';
+import { ThemeSwitcher } from '@helios/core';
 import { Logo } from './Logo';
 
 export const Header = () => {

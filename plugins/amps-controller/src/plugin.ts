@@ -1,4 +1,4 @@
-import type { HeliosPlugin } from '@helios/sdk';
+import type { HeliosPlugin } from '@helios/core';
 import AmpControllerPage from './AmpControllerPage';
 
 export const plugin: HeliosPlugin = {

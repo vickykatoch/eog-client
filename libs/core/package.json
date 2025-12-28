@@ -1,5 +1,5 @@
 {
-	"name": "@helios/sdk",
+	"name": "@helios/core",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
@@ -16,5 +16,10 @@
 		"react": "^19.2.0",
 		"react-router-dom": "^7"
 	},
-	"scripts": {}
+	"scripts": {
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:ui": "vitest --ui",
+		"test:coverage": "vitest run --coverage"
+	}
 }

@@ -15,6 +15,7 @@ const workspaces = [
 	'shell',
 	'plugins/amps-controller',
 	'libs/amps-client',
+	'libs/core',
 	// Add more workspaces as needed
 ];
 

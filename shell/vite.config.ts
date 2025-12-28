@@ -18,7 +18,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@helios/amps-controller': resolve(__dirname, '../plugins/amps-controller/src/plugin.ts'),
-			'@helios/sdk': resolve(__dirname, '../libs/sdk/src/index.ts'),
+			'@helios/core': resolve(__dirname, '../libs/core/src/index.ts'),
 		},
 	},
 	build: {

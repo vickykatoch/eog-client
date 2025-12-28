@@ -7,7 +7,7 @@ export default defineConfig({
 			entry: resolve(__dirname, 'src/index.ts'),
 			name: 'Styles',
 			formats: ['es'],
-			fileName: 'index',
+			fileName: 'HeliosStyles',
 		},
 		outDir: 'dist',
 		sourcemap: true,

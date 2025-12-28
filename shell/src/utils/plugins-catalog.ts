@@ -1,4 +1,4 @@
-import type { HeliosPlugin, PluginsManifest } from '@helios/sdk';
+import type { HeliosPlugin, PluginsManifest } from '@helios/core';
 
 export const pluginCatalog: Record<
 	string,

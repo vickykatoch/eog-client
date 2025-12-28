@@ -5,7 +5,7 @@ import '@salt-ds/theme/index.css';
 import '@salt-ds/theme/css/theme-next.css';
 import '@helios/styles/global.css';
 import './index.css';
-import { AppProvider } from '@helios/sdk';
+import { AppProvider } from '@helios/core';
 import App from './App.tsx';
 
 // biome-ignore lint/style/noNonNullAssertion: false positive
