@@ -1,25 +1,20 @@
 import { Navigate, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import './spin-animation.css';
+import QueryBuilder from './query-builder/QueryBuilder';
 
 function Layout() {
 	return (
 		<div style={{ padding: 12 }}>
-			<h3>AMPS Controller</h3>
-
 			<nav style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-				<NavLink to="overview">Overview</NavLink>
+				<NavLink to="querybuilder">Query Builder</NavLink>
 				<NavLink to="connections">Connections</NavLink>
 				<NavLink to="subscriptions">Subscriptions</NavLink>
 			</nav>
-
 			<Outlet />
 		</div>
 	);
 }
 
-function Overview() {
-	return <div>Overview (TODO)</div>;
-}
 function Connections() {
 	return <div>Connections (TODO)</div>;
 }
@@ -41,8 +36,8 @@ export default function AmpControllerPage() {
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />}>
-				<Route index element={<Navigate to="overview" replace />} />
-				<Route path="overview" element={<Overview />} />
+				<Route index element={<Navigate to="querybuilder" replace />} />
+				<Route path="querybuilder" element={<QueryBuilder />} />
 				<Route path="connections" element={<Connections />} />
 				<Route path="subscriptions" element={<Subscriptions />} />
 			</Route>

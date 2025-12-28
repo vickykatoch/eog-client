@@ -1,1 +1,1 @@
-export * from './VanillaLayout';
+export * from './LayoutHost';

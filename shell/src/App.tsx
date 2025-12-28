@@ -1,23 +1,24 @@
-import type { HeliosPlugin } from '@helios/core';
-import { useEffect, useState } from 'react';
+// import type { HeliosPlugin } from '@helios/core';
+// import { useEffect, useState } from 'react';
 // import { Link, Navigate, Route, Routes } from 'react-router-dom';
-import { VanillaLayout } from './layouts';
-import { loadEnabledPlugins } from './utils/plugins-catalog';
+
+// import { loadEnabledPlugins } from './utils/plugins-catalog';
+import { ShellContextProvider } from './context';
+import { LayoutHost } from './layouts';
 
 export default function App() {
-	const [plugins, setPlugins] = useState<HeliosPlugin[]>([]);
-	const [error, setError] = useState<string | null>(null);
+	// const [plugins, setPlugins] = useState<HeliosPlugin[]>([]);
+	// const [error, setError] = useState<string | null>(null);
 
-	useEffect(() => {
-		loadEnabledPlugins()
-			.then(setPlugins)
-			.catch((e) => setError(String(e)));
-	}, []);
+	// if (error) return <div style={{ padding: 16 }}>Failed to load plugins: {error}</div>;
+	// if (!plugins.length) return <div style={{ padding: 16 }}>Loading…</div>;
 
-	if (error) return <div style={{ padding: 16 }}>Failed to load plugins: {error}</div>;
-	if (!plugins.length) return <div style={{ padding: 16 }}>Loading…</div>;
+	return (
+		<ShellContextProvider>
+			<LayoutHost />
+		</ShellContextProvider>
+	);
 
-	return <VanillaLayout />;
 	/*
 	return (
 		<div style={{ display: 'flex', minHeight: '100vh' }}>

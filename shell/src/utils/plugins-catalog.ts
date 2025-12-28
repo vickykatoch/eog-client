@@ -17,7 +17,15 @@ export async function loadEnabledPlugins(): Promise<HeliosPlugin[]> {
 		],
 	} as PluginsManifest;
 
-	const loaded: HeliosPlugin[] = [];
+	const loaded: HeliosPlugin[] = [
+		{
+			id: 'dashboard',
+			label: 'Home',
+			route: '/dashboard',
+			order: 0,
+			Component: (await import('../dashboard')).Dashboard,
+		},
+	];
 
 	for (const cfg of manifest.plugins) {
 		const importer = pluginCatalog[cfg.module];
@@ -37,7 +45,6 @@ export async function loadEnabledPlugins(): Promise<HeliosPlugin[]> {
 		loaded.push({
 			...plugin,
 			route: cfg.route ? (cfg.route.startsWith('/') ? cfg.route : `/${cfg.route}`) : plugin.route,
-			// route: cfg.route ?? plugin.route,
 			label: cfg.label ?? plugin.label,
 			order: cfg.order ?? plugin.order,
 		});
