@@ -1,17 +1,26 @@
 import { Navigate, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import './spin-animation.css';
-import QueryBuilder from './query-builder/QueryBuilder';
+import { lazy, Suspense } from 'react';
+import { AmpsControllerContextProvider } from './context';
+
+const QueryBuilder = lazy(() => import('./query-builder/QueryBuilder'));
 
 function Layout() {
 	return (
-		<div style={{ padding: 12 }}>
-			<nav style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-				<NavLink to="querybuilder">Query Builder</NavLink>
-				<NavLink to="connections">Connections</NavLink>
-				<NavLink to="subscriptions">Subscriptions</NavLink>
-			</nav>
-			<Outlet />
-		</div>
+		<AmpsControllerContextProvider>
+			<div className="flex grow col">
+				<header className="flex no-shrink">
+					<nav style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
+						<NavLink to="querybuilder">Query Builder</NavLink>
+						<NavLink to="connections">Connections</NavLink>
+						<NavLink to="subscriptions">Subscriptions</NavLink>
+					</nav>
+				</header>
+				<div className="flex grow col">
+					<Outlet />
+				</div>
+			</div>
+		</AmpsControllerContextProvider>
 	);
 }
 
@@ -34,13 +43,15 @@ function Subscriptions() {
 
 export default function AmpControllerPage() {
 	return (
-		<Routes>
-			<Route path="/" element={<Layout />}>
-				<Route index element={<Navigate to="querybuilder" replace />} />
-				<Route path="querybuilder" element={<QueryBuilder />} />
-				<Route path="connections" element={<Connections />} />
-				<Route path="subscriptions" element={<Subscriptions />} />
-			</Route>
-		</Routes>
+		<Suspense fallback={<div>Loading Amp Controller...</div>}>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Navigate to="querybuilder" replace />} />
+					<Route path="querybuilder" element={<QueryBuilder />} />
+					<Route path="connections" element={<Connections />} />
+					<Route path="subscriptions" element={<Subscriptions />} />
+				</Route>
+			</Routes>
+		</Suspense>
 	);
 }

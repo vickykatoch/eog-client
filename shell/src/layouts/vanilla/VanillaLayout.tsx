@@ -1,8 +1,14 @@
 import { type FC, Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { useShellContext } from '../../context';
 import { Header } from '../Header';
 import { LeftBar } from './LeftBar';
+
+const Layout = () => (
+	<div className="flex grow col">
+		<Outlet />
+	</div>
+);
 
 export const VanillaLayout: FC = () => {
 	const { plugins } = useShellContext();
@@ -11,14 +17,20 @@ export const VanillaLayout: FC = () => {
 			<Header />
 			<div className="flex row grow">
 				<LeftBar />
-				<div className="flex grow col wrap p-1">
+				<div className="flex grow col wrap m-1">
 					<Suspense fallback={<div>Loading plugin…</div>}>
 						<Routes>
-							<Route path="/" element={<Navigate to={plugins[0].route} replace />} />
+							<Route element={<Layout />}>
+								<Route path="/" element={<Navigate to={plugins[0].route} replace />} />
+							</Route>
 							{plugins.map((p) => (
-								<Route key={p.id} path={`${p.route}/*`} element={<p.Component />} />
+								<Route element={<Layout />} key={p.id}>
+									<Route path={`${p.route}/*`} element={<p.Component />} />
+								</Route>
 							))}
-							<Route path="*" element={<div>Not found</div>} />
+							<Route element={<Layout />}>
+								<Route path="*" element={<div>Not found</div>} />
+							</Route>
 						</Routes>
 					</Suspense>
 				</div>
