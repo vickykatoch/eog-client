@@ -9,14 +9,14 @@ function Layout() {
 	return (
 		<AmpsControllerContextProvider>
 			<div className="flex grow col">
-				<header className="flex no-shrink">
-					<nav style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-						<NavLink to="querybuilder">Query Builder</NavLink>
-						<NavLink to="connections">Connections</NavLink>
-						<NavLink to="subscriptions">Subscriptions</NavLink>
-					</nav>
-				</header>
-				<div className="flex grow col">
+				<nav className="flex no-shrink gap-md mg-b bar-1 py-1 px-2 justify-center-v">
+					{/* <nav className="flex gap-md"> */}
+					<NavLink to="querybuilder">Query Builder</NavLink>
+					<NavLink to="connections">Connections</NavLink>
+					<NavLink to="subscriptions">Subscriptions</NavLink>
+					{/* </nav> */}
+				</nav>
+				<div className="flex grow col gap-sm">
 					<Outlet />
 				</div>
 			</div>

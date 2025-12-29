@@ -1,7 +1,9 @@
 import { type FC, useCallback, useState } from 'react';
-import { QBForm } from './QBForm';
+import { QBFooter } from './QBFooter';
 import { QBHeader } from './QBHeader';
-import { QueryTypes } from './QueryTypes';
+import { QBLeftForm } from './QBLeftForm';
+import { QBMiddleForm } from './QBMiddleForm';
+import { QBRightForm } from './QBRightForm';
 
 export const QBParams: FC = () => {
 	const [collapsed, setCollapsed] = useState(false);
@@ -11,17 +13,21 @@ export const QBParams: FC = () => {
 	}, []);
 
 	return (
-		<div className="flex no-shrink col">
+		<div className="flex no-shrink col bdr">
 			<QBHeader
 				label="Query Builder"
 				onToggleVisibility={handleToggleVisibility}
 				collapsed={collapsed}
 			/>
 			{!collapsed && (
-				<div className="flex grow">
-					<QueryTypes />
-					<QBForm />
-				</div>
+				<>
+					<div className="flex no-shrink p-1 gap-md">
+						<QBLeftForm />
+						<QBMiddleForm />
+						<QBRightForm />
+					</div>
+					<QBFooter />
+				</>
 			)}
 		</div>
 	);

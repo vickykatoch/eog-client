@@ -39,6 +39,6 @@ export const DEFAULT_STATE: ApplicationState = {
 	},
 	themeSettings: {
 		mode: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-		density: 'low',
+		density: 'medium',
 	},
 };

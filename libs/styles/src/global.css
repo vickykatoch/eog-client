@@ -15,6 +15,7 @@
 @import "@fontsource/open-sans/800.css";
 @import "@fontsource/open-sans/800-italic.css";
 @import "@fontsource/pt-mono";
+@import "./border.css";
 
 html,
 body {

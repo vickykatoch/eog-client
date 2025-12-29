@@ -1,3 +1,7 @@
+.salt-theme {
+	--mg-side: 0.2rem;
+}
+
 .px-sm-1 {
 	padding-left: var(--salt-spacing-25);
 	padding-right: var(--salt-spacing-25);
@@ -126,4 +130,19 @@
 }
 .m-5 {
 	margin: var(--salt-spacing-600);
+}
+.mg {
+	margin: var(--mg-side);
+}
+.mg-l {
+	margin-left: var(--mg-side);
+}
+.mg-r {
+	margin-right: var(--mg-side);
+}
+.mg-t {
+	margin-top: var(--mg-side);
+}
+.mg-b {
+	margin-bottom: var(--mg-side);
 }

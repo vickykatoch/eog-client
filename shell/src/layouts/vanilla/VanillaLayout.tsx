@@ -17,7 +17,7 @@ export const VanillaLayout: FC = () => {
 			<Header />
 			<div className="flex row grow">
 				<LeftBar />
-				<div className="flex grow col wrap m-1">
+				<div className="flex grow col wrap mg">
 					<Suspense fallback={<div>Loading plugin…</div>}>
 						<Routes>
 							<Route element={<Layout />}>

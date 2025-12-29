@@ -10,7 +10,7 @@ interface Props {
 
 export const QBHeader: FC<Props> = ({ label, collapsed, onToggleVisibility }) => {
 	return (
-		<header className="flex no-shrink bar-1 justify-center-v p-1">
+		<header className="flex no-shrink bar-1 bdr justify-center-v p-1">
 			<Label className="no-shrink">{label}</Label>
 			<Input className="flex-grow mx-2" placeholder="Amps Url..." />
 			{collapsed ? (

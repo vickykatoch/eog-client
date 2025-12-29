@@ -1,0 +1,5 @@
+.bdr {
+	/* border: 1px solid var(--salt-actionable-bold-borderColor); */
+	border: 1px solid #3b3a3a;
+	/* border: 1px solid var(--salt-actionable-bold-borderColor-active); */
+}
