@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AMPSConfig>
+    <Name>Helios Amps</Name>
+    <Admin>
+        <InetAddr>0.0.0.0:8085</InetAddr>
+        <SQLTransport>websocket-any</SQLTransport>
+        <Web>
+            <Enable>true</Enable>
+        </Web>
+        <FileName>stats.db</FileName>
+        <Interval>10s</Interval>
+        <Statistics>
+            <Enable>true</Enable>
+        </Statistics>
+    </Admin>
+
+    <Transports>
+        <Transport>
+            <Name>any-tcp</Name>
+            <Type>tcp</Type>
+            <InetAddr>9007</InetAddr>
+            <Protocol>amps</Protocol>
+        </Transport>
+        <Transport>
+            <Name>websocket-any</Name>
+            <Protocol>websocket</Protocol>
+            <Type>tcp</Type>
+            <InetAddr>9008</InetAddr>
+        </Transport>
+    </Transports>
+
+    <Logging>
+        <Target>
+            <Protocol>stdout</Protocol>
+            <Level>error</Level>
+            <IncludeErrors>00-0015</IncludeErrors>
+        </Target>
+    </Logging>
+    <Topics>
+        <Topic>
+            <Name>/reference/data/instruments</Name>
+            <Type>json</Type>
+            <Key>id</Key>
+        </Topic>
+    </Topics>
+</AMPSConfig>

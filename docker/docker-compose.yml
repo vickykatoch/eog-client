@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  amps:
+    platform: linux/amd64
+    build: .
+    container_name: amps
+    ports:
+      - "9007:9007"
+      - "9008:9008"
+      - "8085:8085"
+    volumes:
+      - ./config.xml:/amps/config.xml:ro
+    restart: unless-stopped
