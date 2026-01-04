@@ -1,12 +1,12 @@
 {
-	"name": "@helios/amps-client",
+	"name": "@helios/filter-api",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
-	"main": "./src/amps-cli.ts",
-	"types": "./src/amps-cli.ts",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
 	"exports": {
-		".": "./src/amps-cli.ts"
+		".": "./src/index.ts"
 	},
 	"scripts": {
 		"test": "vitest run",
@@ -22,7 +22,6 @@
 		"vitest": "^2.1.9"
 	},
 	"dependencies": {
-		"amps": "^5.3.4-0.378635.60b2fcc",
-		"@helios/filter-api": "^0.0.1"
+		"amps": "^5.3.4-0.378635.60b2fcc"
 	}
 }

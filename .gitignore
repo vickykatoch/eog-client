@@ -143,3 +143,4 @@ dist
 Thumbs.db
 coverage
 .vite
+docker/amps-bin

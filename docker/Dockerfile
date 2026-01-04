@@ -1,9 +1,10 @@
+# https://devnull.crankuptheamps.com/releases/amps/develop/AMPS-develop-Release-Linux.tar.gz
 FROM ubuntu:22.04
 
 WORKDIR /amps
 
 # Copy your AMPS distribution into the image
-COPY amps-server/ /amps/
+COPY amps-bin/ /amps/
 COPY rates_instruments.json /amps/rates_instruments.json
 # Copy config
 COPY config.xml /amps/config.xml
