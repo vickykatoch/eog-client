@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildFilter } from '../src/amps-filter-builder';
+import { buildAmpsFilter } from '../src/amps-filter-builder';
 import {
 	ComparisonOperator,
 	type FieldRule,
@@ -8,7 +8,7 @@ import {
 	LogicalOperator,
 } from '../src/types';
 
-describe('buildFilter', () => {
+describe('buildAmpsFilter', () => {
 	describe('Field Rules - Basic Operators', () => {
 		it('should build EQUALS filter with string', () => {
 			const filter: FieldRule = {
@@ -17,7 +17,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'John',
 			};
-			expect(buildFilter(filter)).toBe("/name = 'John'");
+			expect(buildAmpsFilter(filter)).toBe("/name = 'John'");
 		});
 
 		it('should build NOT_EQUALS filter with string', () => {
@@ -27,7 +27,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.NOT_EQUALS,
 				value: 'inactive',
 			};
-			expect(buildFilter(filter)).toBe("/status != 'inactive'");
+			expect(buildAmpsFilter(filter)).toBe("/status != 'inactive'");
 		});
 
 		it('should build GREATER_THAN filter with number', () => {
@@ -37,7 +37,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.GREATER_THAN,
 				value: 100,
 			};
-			expect(buildFilter(filter)).toBe('/price > 100');
+			expect(buildAmpsFilter(filter)).toBe('/price > 100');
 		});
 
 		it('should build GREATER_THAN_OR_EQUALS filter with number', () => {
@@ -47,7 +47,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.GREATER_THAN_OR_EQUALS,
 				value: 50,
 			};
-			expect(buildFilter(filter)).toBe('/quantity >= 50');
+			expect(buildAmpsFilter(filter)).toBe('/quantity >= 50');
 		});
 
 		it('should build LESS_THAN filter with number', () => {
@@ -57,7 +57,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.LESS_THAN,
 				value: 30,
 			};
-			expect(buildFilter(filter)).toBe('/age < 30');
+			expect(buildAmpsFilter(filter)).toBe('/age < 30');
 		});
 
 		it('should build LESS_THAN_OR_EQUALS filter with number', () => {
@@ -67,7 +67,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.LESS_THAN_OR_EQUALS,
 				value: 25.5,
 			};
-			expect(buildFilter(filter)).toBe('/discount <= 25.5');
+			expect(buildAmpsFilter(filter)).toBe('/discount <= 25.5');
 		});
 	});
 
@@ -79,7 +79,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.STARTS_WITH,
 				value: 'John',
 			};
-			expect(buildFilter(filter)).toBe("/name BEGINS WITH('John')");
+			expect(buildAmpsFilter(filter)).toBe("/name BEGINS WITH('John')");
 		});
 
 		it('should build ENDS_WITH filter', () => {
@@ -90,7 +90,7 @@ describe('buildFilter', () => {
 				value: '@example.com',
 			};
 
-			expect(buildFilter(filter)).toBe("/email ENDS WITH('@example.com')");
+			expect(buildAmpsFilter(filter)).toBe("/email ENDS WITH('@example.com')");
 		});
 
 		it('should build CONTAINS filter', () => {
@@ -100,7 +100,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.CONTAINS,
 				value: 'important',
 			};
-			expect(buildFilter(filter)).toBe("/description LIKE 'important'");
+			expect(buildAmpsFilter(filter)).toBe("/description LIKE 'important'");
 		});
 
 		it('should build LIKE filter with custom pattern', () => {
@@ -110,7 +110,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.LIKE,
 				value: 'A%B_C',
 			};
-			expect(buildFilter(filter)).toBe("/code LIKE 'A%B_C'");
+			expect(buildAmpsFilter(filter)).toBe("/code LIKE 'A%B_C'");
 		});
 
 		it('should escape LIKE wildcards in STARTS_WITH', () => {
@@ -120,7 +120,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.STARTS_WITH,
 				value: '50%',
 			};
-			expect(buildFilter(filter)).toBe("/name BEGINS WITH('50\\%')");
+			expect(buildAmpsFilter(filter)).toBe("/name BEGINS WITH('50\\%')");
 		});
 
 		it('should escape LIKE wildcards in ENDS_WITH', () => {
@@ -130,7 +130,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.ENDS_WITH,
 				value: 'test_value',
 			};
-			expect(buildFilter(filter)).toBe("/pattern ENDS WITH('test\\_value')");
+			expect(buildAmpsFilter(filter)).toBe("/pattern ENDS WITH('test\\_value')");
 		});
 
 		it('should escape LIKE wildcards in CONTAINS', () => {
@@ -140,7 +140,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.CONTAINS,
 				value: '100%_discount',
 			};
-			expect(buildFilter(filter)).toBe("/content LIKE '100\\%\\_discount'");
+			expect(buildAmpsFilter(filter)).toBe("/content LIKE '100\\%\\_discount'");
 		});
 
 		it('should escape backslashes in LIKE patterns', () => {
@@ -150,7 +150,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.CONTAINS,
 				value: 'C:\\Users',
 			};
-			expect(buildFilter(filter)).toBe("/path LIKE 'C:\\\\Users'");
+			expect(buildAmpsFilter(filter)).toBe("/path LIKE 'C:\\\\Users'");
 		});
 	});
 
@@ -162,7 +162,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.IN,
 				value: ['active', 'pending', 'approved'],
 			};
-			expect(buildFilter(filter)).toBe("/status IN ('active', 'pending', 'approved')");
+			expect(buildAmpsFilter(filter)).toBe("/status IN ('active', 'pending', 'approved')");
 		});
 
 		it('should build NOT_IN filter with string array', () => {
@@ -172,7 +172,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.NOT_IN,
 				value: ['archived', 'deleted'],
 			};
-			expect(buildFilter(filter)).toBe("/category NOT IN ('archived', 'deleted')");
+			expect(buildAmpsFilter(filter)).toBe("/category NOT IN ('archived', 'deleted')");
 		});
 
 		it('should build IN filter with number array', () => {
@@ -182,7 +182,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.IN,
 				value: [1, 2, 3, 5, 8],
 			};
-			expect(buildFilter(filter)).toBe('/id IN (1, 2, 3, 5, 8)');
+			expect(buildAmpsFilter(filter)).toBe('/id IN (1, 2, 3, 5, 8)');
 		});
 
 		it('should build NOT_IN filter with number array', () => {
@@ -192,7 +192,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.NOT_IN,
 				value: [404, 500, 503],
 			};
-			expect(buildFilter(filter)).toBe('/errorCode NOT IN (404, 500, 503)');
+			expect(buildAmpsFilter(filter)).toBe('/errorCode NOT IN (404, 500, 503)');
 		});
 
 		it('should throw error when IN operator receives non-array', () => {
@@ -202,7 +202,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.IN,
 				value: 'active',
 			};
-			expect(() => buildFilter(filter)).toThrow('IN expects value to be an array');
+			expect(() => buildAmpsFilter(filter)).toThrow('IN expects value to be an array');
 		});
 
 		it('should throw error when NOT_IN operator receives non-array', () => {
@@ -212,7 +212,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.NOT_IN,
 				value: 'active',
 			};
-			expect(() => buildFilter(filter)).toThrow('NOT IN expects value to be an array');
+			expect(() => buildAmpsFilter(filter)).toThrow('NOT IN expects value to be an array');
 		});
 	});
 
@@ -224,7 +224,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'hello',
 			};
-			expect(buildFilter(filter)).toBe("/text = 'hello'");
+			expect(buildAmpsFilter(filter)).toBe("/text = 'hello'");
 		});
 
 		it('should escape single quotes in strings', () => {
@@ -234,7 +234,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: "it's working",
 			};
-			expect(buildFilter(filter)).toBe("/message = 'it''s working'");
+			expect(buildAmpsFilter(filter)).toBe("/message = 'it''s working'");
 		});
 
 		it('should handle empty string', () => {
@@ -244,7 +244,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: '',
 			};
-			expect(buildFilter(filter)).toBe("/value = ''");
+			expect(buildAmpsFilter(filter)).toBe("/value = ''");
 		});
 
 		it('should handle strings with multiple quotes', () => {
@@ -254,7 +254,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: "I'm saying 'hello' again",
 			};
-			expect(buildFilter(filter)).toBe("/quote = 'I''m saying ''hello'' again'");
+			expect(buildAmpsFilter(filter)).toBe("/quote = 'I''m saying ''hello'' again'");
 		});
 	});
 
@@ -266,7 +266,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 42,
 			};
-			expect(buildFilter(filter)).toBe('/count = 42');
+			expect(buildAmpsFilter(filter)).toBe('/count = 42');
 		});
 
 		it('should handle decimal values', () => {
@@ -276,7 +276,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 99.99,
 			};
-			expect(buildFilter(filter)).toBe('/price = 99.99');
+			expect(buildAmpsFilter(filter)).toBe('/price = 99.99');
 		});
 
 		it('should handle negative numbers', () => {
@@ -286,7 +286,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: -15.5,
 			};
-			expect(buildFilter(filter)).toBe('/temperature = -15.5');
+			expect(buildAmpsFilter(filter)).toBe('/temperature = -15.5');
 		});
 
 		it('should handle zero', () => {
@@ -296,7 +296,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 0,
 			};
-			expect(buildFilter(filter)).toBe('/balance = 0');
+			expect(buildAmpsFilter(filter)).toBe('/balance = 0');
 		});
 
 		it('should convert numeric strings to numbers', () => {
@@ -306,7 +306,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: '123.45',
 			};
-			expect(buildFilter(filter)).toBe('/amount = 123.45');
+			expect(buildAmpsFilter(filter)).toBe('/amount = 123.45');
 		});
 
 		it('should throw error for invalid number values', () => {
@@ -316,7 +316,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'not-a-number',
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid number value');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid number value');
 		});
 
 		it('should throw error for Infinity', () => {
@@ -326,7 +326,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: Infinity,
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid number value');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid number value');
 		});
 
 		it('should throw error for NaN', () => {
@@ -336,7 +336,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: NaN,
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid number value');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid number value');
 		});
 	});
 
@@ -348,7 +348,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: true,
 			};
-			expect(buildFilter(filter)).toBe('/active = true');
+			expect(buildAmpsFilter(filter)).toBe('/active = true');
 		});
 
 		it('should handle false boolean', () => {
@@ -358,7 +358,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: false,
 			};
-			expect(buildFilter(filter)).toBe('/deleted = false');
+			expect(buildAmpsFilter(filter)).toBe('/deleted = false');
 		});
 
 		it('should convert "true" string to boolean', () => {
@@ -368,7 +368,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'true',
 			};
-			expect(buildFilter(filter)).toBe('/enabled = true');
+			expect(buildAmpsFilter(filter)).toBe('/enabled = true');
 		});
 
 		it('should convert "false" string to boolean', () => {
@@ -378,7 +378,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'false',
 			};
-			expect(buildFilter(filter)).toBe('/visible = false');
+			expect(buildAmpsFilter(filter)).toBe('/visible = false');
 		});
 
 		it('should handle case-insensitive boolean strings', () => {
@@ -388,7 +388,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'TRUE',
 			};
-			expect(buildFilter(filter)).toBe('/flag = true');
+			expect(buildAmpsFilter(filter)).toBe('/flag = true');
 		});
 
 		it('should throw error for invalid boolean values', () => {
@@ -398,7 +398,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'yes',
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid boolean value');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid boolean value');
 		});
 	});
 
@@ -411,7 +411,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: date,
 			};
-			expect(buildFilter(filter)).toBe("/createdAt = '2024-01-15T10:30:00.000Z'");
+			expect(buildAmpsFilter(filter)).toBe("/createdAt = '2024-01-15T10:30:00.000Z'");
 		});
 
 		it('should handle ISO date string', () => {
@@ -421,7 +421,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.GREATER_THAN,
 				value: '2024-06-01T00:00:00.000Z',
 			};
-			expect(buildFilter(filter)).toBe("/updatedAt > '2024-06-01T00:00:00.000Z'");
+			expect(buildAmpsFilter(filter)).toBe("/updatedAt > '2024-06-01T00:00:00.000Z'");
 		});
 
 		it('should handle epoch milliseconds', () => {
@@ -433,7 +433,7 @@ describe('buildFilter', () => {
 				value: epoch,
 			};
 			const expectedDate = new Date(epoch).toISOString();
-			expect(buildFilter(filter)).toBe(`/timestamp < '${expectedDate}'`);
+			expect(buildAmpsFilter(filter)).toBe(`/timestamp < '${expectedDate}'`);
 		});
 
 		it('should handle various date string formats', () => {
@@ -443,7 +443,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: '2024-12-25',
 			};
-			const result = buildFilter(filter);
+			const result = buildAmpsFilter(filter);
 			expect(result).toMatch(/\/eventDate = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z'/);
 		});
 
@@ -454,7 +454,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: new Date('invalid'),
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid Date instance');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid Date instance');
 		});
 
 		it('should throw error for invalid date string', () => {
@@ -464,7 +464,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'not-a-date',
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid date string');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid date string');
 		});
 
 		it('should throw error for invalid epoch', () => {
@@ -474,7 +474,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: Number.NaN,
 			};
-			expect(() => buildFilter(filter)).toThrow('Invalid epoch ms date');
+			expect(() => buildAmpsFilter(filter)).toThrow('Invalid epoch ms date');
 		});
 	});
 
@@ -486,7 +486,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: null,
 			};
-			expect(buildFilter(filter)).toBe('/name = NULL');
+			expect(buildAmpsFilter(filter)).toBe('/name = NULL');
 		});
 
 		it('should handle null value for NUMBER', () => {
@@ -496,7 +496,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: null,
 			};
-			expect(buildFilter(filter)).toBe('/count = NULL');
+			expect(buildAmpsFilter(filter)).toBe('/count = NULL');
 		});
 
 		it('should handle undefined value', () => {
@@ -506,7 +506,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: undefined,
 			};
-			expect(buildFilter(filter)).toBe('/optional = NULL');
+			expect(buildAmpsFilter(filter)).toBe('/optional = NULL');
 		});
 	});
 
@@ -529,7 +529,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe("(/status = 'active' AND /age > 18)");
+			expect(buildAmpsFilter(filter)).toBe("(/status = 'active' AND /age > 18)");
 		});
 
 		it('should build OR group with multiple rules', () => {
@@ -550,7 +550,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe("(/priority = 'high' OR /urgent = true)");
+			expect(buildAmpsFilter(filter)).toBe("(/priority = 'high' OR /urgent = true)");
 		});
 
 		it('should build group with three or more rules', () => {
@@ -577,7 +577,9 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe("(/type = 'order' AND /amount > 1000 AND /verified = true)");
+			expect(buildAmpsFilter(filter)).toBe(
+				"(/type = 'order' AND /amount > 1000 AND /verified = true)",
+			);
 		});
 	});
 
@@ -611,7 +613,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe(
+			expect(buildAmpsFilter(filter)).toBe(
 				"((/country = 'US' AND /state = 'CA') OR /international = true)",
 			);
 		});
@@ -645,7 +647,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe(
+			expect(buildAmpsFilter(filter)).toBe(
 				"(/active = true AND (/plan = 'premium' OR /plan = 'enterprise'))",
 			);
 		});
@@ -690,7 +692,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe(
+			expect(buildAmpsFilter(filter)).toBe(
 				"(((/category = 'electronics' AND /price < 500) OR /featured = true) AND /inStock = true)",
 			);
 		});
@@ -704,7 +706,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'test',
 			};
-			expect(buildFilter(filter)).toBe("/name = 'test'");
+			expect(buildAmpsFilter(filter)).toBe("/name = 'test'");
 		});
 
 		it('should not double-prefix field that already has slash', () => {
@@ -714,7 +716,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'test',
 			};
-			expect(buildFilter(filter)).toBe("/name = 'test'");
+			expect(buildAmpsFilter(filter)).toBe("/name = 'test'");
 		});
 
 		it('should not prefix field when prefixSlash is false', () => {
@@ -724,7 +726,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'test',
 			};
-			expect(buildFilter(filter, { prefixSlash: false })).toBe("name = 'test'");
+			expect(buildAmpsFilter(filter, { prefixSlash: false })).toBe("name = 'test'");
 		});
 
 		it('should respect prefixSlash option in groups', () => {
@@ -745,7 +747,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter, { prefixSlash: false })).toBe(
+			expect(buildAmpsFilter(filter, { prefixSlash: false })).toBe(
 				"(firstName = 'John' AND lastName = 'Doe')",
 			);
 		});
@@ -757,7 +759,7 @@ describe('buildFilter', () => {
 				operator: LogicalOperator.AND,
 				rules: [],
 			};
-			expect(buildFilter(filter)).toBe('');
+			expect(buildAmpsFilter(filter)).toBe('');
 		});
 
 		it('should throw error for empty group when allowEmptyGroup is false', () => {
@@ -765,7 +767,7 @@ describe('buildFilter', () => {
 				operator: LogicalOperator.AND,
 				rules: [],
 			};
-			expect(() => buildFilter(filter, { allowEmptyGroup: false })).toThrow(
+			expect(() => buildAmpsFilter(filter, { allowEmptyGroup: false })).toThrow(
 				'FilterGroup.rules must contain at least one rule/group',
 			);
 		});
@@ -786,7 +788,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe('(/active = true)');
+			expect(buildAmpsFilter(filter)).toBe('(/active = true)');
 		});
 	});
 
@@ -809,7 +811,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe("(/a = '1' AND /b = '2')");
+			expect(buildAmpsFilter(filter)).toBe("(/a = '1' AND /b = '2')");
 		});
 
 		it('should wrap top level when wrapTopLevel is true', () => {
@@ -819,7 +821,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'test',
 			};
-			expect(buildFilter(filter, { wrapTopLevel: true })).toBe("(/name = 'test')");
+			expect(buildAmpsFilter(filter, { wrapTopLevel: true })).toBe("(/name = 'test')");
 		});
 
 		it('should not double-wrap groups when wrapTopLevel is true', () => {
@@ -840,7 +842,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter, { wrapTopLevel: true })).toBe("((/a = '1' AND /b = '2'))");
+			expect(buildAmpsFilter(filter, { wrapTopLevel: true })).toBe("((/a = '1' AND /b = '2'))");
 		});
 	});
 
@@ -852,7 +854,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'test',
 			};
-			expect(() => buildFilter(filter)).toThrow('FieldRule.field is required');
+			expect(() => buildAmpsFilter(filter)).toThrow('FieldRule.field is required');
 		});
 
 		it('should throw error when array is used with non-array operator', () => {
@@ -862,7 +864,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: ['a', 'b'],
 			};
-			expect(() => buildFilter(filter)).toThrow('= does not support array values');
+			expect(() => buildAmpsFilter(filter)).toThrow('= does not support array values');
 		});
 
 		it('should throw error when STARTS_WITH receives array', () => {
@@ -872,7 +874,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.STARTS_WITH,
 				value: ['a', 'b'],
 			};
-			expect(() => buildFilter(filter)).toThrow('STARTS_WITH expects a scalar string value');
+			expect(() => buildAmpsFilter(filter)).toThrow('STARTS_WITH expects a scalar string value');
 		});
 
 		it('should throw error when ENDS_WITH receives array', () => {
@@ -882,7 +884,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.ENDS_WITH,
 				value: ['a', 'b'],
 			};
-			expect(() => buildFilter(filter)).toThrow('ENDS_WITH expects a scalar string value');
+			expect(() => buildAmpsFilter(filter)).toThrow('ENDS_WITH expects a scalar string value');
 		});
 
 		it('should throw error when CONTAINS receives array', () => {
@@ -892,7 +894,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.CONTAINS,
 				value: ['a', 'b'],
 			};
-			expect(() => buildFilter(filter)).toThrow('CONTAINS expects a scalar string value');
+			expect(() => buildAmpsFilter(filter)).toThrow('CONTAINS expects a scalar string value');
 		});
 
 		it('should handle empty IN array', () => {
@@ -902,7 +904,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.IN,
 				value: [],
 			};
-			expect(buildFilter(filter)).toBe('/status IN ()');
+			expect(buildAmpsFilter(filter)).toBe('/status IN ()');
 		});
 
 		it('should handle single element IN array', () => {
@@ -912,7 +914,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.IN,
 				value: [42],
 			};
-			expect(buildFilter(filter)).toBe('/id IN (42)');
+			expect(buildAmpsFilter(filter)).toBe('/id IN (42)');
 		});
 	});
 
@@ -958,7 +960,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe(
+			expect(buildAmpsFilter(filter)).toBe(
 				"(/category IN ('electronics', 'computers', 'phones') AND (/price < 1000 OR /onSale = true) AND /inStock = true AND /rating >= 4)",
 			);
 		});
@@ -1004,8 +1006,8 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			console.log(buildFilter(filter));
-			expect(buildFilter(filter)).toBe(
+			console.log(buildAmpsFilter(filter));
+			expect(buildAmpsFilter(filter)).toBe(
 				"((/firstName BEGINS WITH('John') OR /lastName BEGINS WITH('John') OR /email LIKE 'john') AND /status = 'active' AND /lastLogin > '2024-01-01T00:00:00.000Z')",
 			);
 		});
@@ -1056,7 +1058,7 @@ describe('buildFilter', () => {
 					},
 				],
 			};
-			expect(buildFilter(filter)).toBe(
+			expect(buildAmpsFilter(filter)).toBe(
 				"(/type IN ('purchase', 'refund') AND ((/amount > 10000 AND /verified = true) OR /flagged = true) AND /status != 'cancelled')",
 			);
 		});
@@ -1070,7 +1072,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'Test with @#$%^&*()!',
 			};
-			expect(buildFilter(filter)).toBe("/description = 'Test with @#$%^&*()!'");
+			expect(buildAmpsFilter(filter)).toBe("/description = 'Test with @#$%^&*()!'");
 		});
 
 		it('should handle newlines in string values', () => {
@@ -1080,7 +1082,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'line1\nline2\nline3',
 			};
-			expect(buildFilter(filter)).toBe("/text = 'line1\nline2\nline3'");
+			expect(buildAmpsFilter(filter)).toBe("/text = 'line1\nline2\nline3'");
 		});
 
 		it('should handle tabs in string values', () => {
@@ -1090,7 +1092,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'col1\tcol2\tcol3',
 			};
-			expect(buildFilter(filter)).toBe("/data = 'col1\tcol2\tcol3'");
+			expect(buildAmpsFilter(filter)).toBe("/data = 'col1\tcol2\tcol3'");
 		});
 
 		it('should handle unicode characters', () => {
@@ -1100,7 +1102,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.EQUALS,
 				value: 'こんにちは 世界',
 			};
-			expect(buildFilter(filter)).toBe("/name = 'こんにちは 世界'");
+			expect(buildAmpsFilter(filter)).toBe("/name = 'こんにちは 世界'");
 		});
 
 		it('should handle emojis', () => {
@@ -1110,7 +1112,7 @@ describe('buildFilter', () => {
 				operator: ComparisonOperator.CONTAINS,
 				value: '🎉',
 			};
-			expect(buildFilter(filter)).toBe("/message LIKE '🎉'");
+			expect(buildAmpsFilter(filter)).toBe("/message LIKE '🎉'");
 		});
 	});
 });

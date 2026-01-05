@@ -1,4 +1,3 @@
-// Converts your Filter (FieldRule | FilterGroup) into an AMPS filter string.
 import {
 	ComparisonOperator,
 	type FieldRule,
@@ -6,7 +5,7 @@ import {
 	type Filter,
 	type FilterGroup,
 	// LogicalOperator,
-} from './types'; // adjust import path or remove if in same file
+} from './types';
 
 export type BuildFilterOptions = {
 	/** Prefix fields with "/" if missing (common in AMPS). Default: true */
@@ -19,7 +18,7 @@ export type BuildFilterOptions = {
 	wrapTopLevel?: boolean;
 };
 
-export function buildFilter(filter: Filter, opts: BuildFilterOptions = {}): string {
+export function buildAmpsFilter(filter: Filter, opts: BuildFilterOptions = {}): string {
 	const options: Required<BuildFilterOptions> = {
 		prefixSlash: opts.prefixSlash ?? true,
 		allowEmptyGroup: opts.allowEmptyGroup ?? true,
@@ -31,8 +30,6 @@ export function buildFilter(filter: Filter, opts: BuildFilterOptions = {}): stri
 	if (!out) return '';
 	return options.wrapTopLevel ? `(${out})` : out;
 }
-
-// ---------- internals ----------
 
 function isGroup(node: Filter): node is FilterGroup {
 	return (node as FilterGroup).rules !== undefined;

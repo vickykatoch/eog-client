@@ -7,7 +7,7 @@ export enum QueryType {
 	SowAndDeltaSubscribe = 'sowanddeltasubscribe',
 }
 export interface AmpsConnectionConfig {
-	id: string;
+	name: string;
 	url: string;
 	userId?: string;
 	topic: string;

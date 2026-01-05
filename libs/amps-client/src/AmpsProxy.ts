@@ -1,18 +1,34 @@
-import type { Filter as AmpsFilter } from '@helios/filter-api';
-import type { CommandParams } from 'amps';
-import { AmpsConnection } from './amps-connection';
+import { type Filter as AmpsFilter, buildAmpsFilter } from '@helios/filter-api';
+import type { CommandParams, Message } from 'amps';
+import ConnectionManager from './connection-manager';
 import type { AmpsConnectionConfig, DataMessage } from './types';
 
 export class AmpsProxy {
-	private readonly _connection: AmpsConnection;
+	constructor(readonly connectionConfig: AmpsConnectionConfig) {}
 
-	constructor(readonly connectionConfig: AmpsConnectionConfig) {
-		this._connection = new AmpsConnection(connectionConfig);
-	}
+	async fetch<T = unknown>(
+		_filterRule: AmpsFilter,
+		_params?: CommandParams,
+	): Promise<DataMessage<T>> {
+		const filterString = buildAmpsFilter(_filterRule);
+		const connection = ConnectionManager.getConnection(this.connectionConfig);
+		const client = await connection.getClient();
+		const { topic } = this.connectionConfig;
 
-	fetch<T = unknown>(_filterRule: AmpsFilter, _params?: CommandParams): Promise<DataMessage<T>> {
-		console.log(this._connection);
-		return Promise.resolve({ type: 'sow', data: [] });
+		return new Promise<DataMessage<T>>((resolve) => {
+			const sowData: T[] = [];
+			const onMessage = ({ header, data }: Message) => {
+				console.log('Received AMPS message:', { header, data });
+				const command = header.command();
+				if (command === 'group_end') {
+					connection.dispose();
+					resolve({ type: 'sow', data: sowData });
+				} else {
+					data && sowData.push(data);
+				}
+			};
+			client.sow(onMessage, topic, filterString, _params);
+		});
 	}
 
 	subscribe(_filterRule: AmpsFilter, _params?: CommandParams) {}
